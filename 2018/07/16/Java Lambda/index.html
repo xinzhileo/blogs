@@ -6,18 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018 | 辛植的博客</title>
+  <title>Java 流式写法 | 辛植的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="看海/看花">
-<meta property="og:type" content="website">
-<meta property="og:title" content="辛植的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
+  <meta name="description" content="本文列举了十个使用一行代码即可独立完成(不依赖其他代码)的业务逻辑，主要依赖的是Java8中的Lambda和Stream等新特性以及try-with-resources、JAXB等。  对列表/数组中的每个元素都乘以2  // Range是半开区间 int[] ia = range(1, 10).map(i -&amp;gt; i * 2).toArray(); List&amp;lt;Integer&amp;gt; r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java 流式写法">
+<meta property="og:url" content="http://yoursite.com/2018/07/16/Java Lambda/index.html">
 <meta property="og:site_name" content="辛植的博客">
-<meta property="og:description" content="看海/看花">
+<meta property="og:description" content="本文列举了十个使用一行代码即可独立完成(不依赖其他代码)的业务逻辑，主要依赖的是Java8中的Lambda和Stream等新特性以及try-with-resources、JAXB等。  对列表/数组中的每个元素都乘以2  // Range是半开区间 int[] ia = range(1, 10).map(i -&amp;gt; i * 2).toArray(); List&amp;lt;Integer&amp;gt; r">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-16T06:50:39.044Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="辛植的博客">
-<meta name="twitter:description" content="看海/看花">
+<meta name="twitter:title" content="Java 流式写法">
+<meta name="twitter:description" content="本文列举了十个使用一行代码即可独立完成(不依赖其他代码)的业务逻辑，主要依赖的是Java8中的Lambda和Stream等新特性以及try-with-resources、JAXB等。  对列表/数组中的每个元素都乘以2  // Range是半开区间 int[] ia = range(1, 10).map(i -&amp;gt; i * 2).toArray(); List&amp;lt;Integer&amp;gt; r">
   
     <link rel="alternative" href="/atom.xml" title="辛植的博客" type="application/atom+xml">
   
@@ -153,260 +154,225 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Java Lambda" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Java 流式写法
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/16/Java Lambda/" class="archive-article-date">
+
+        
+        <a href="/2018/07/16/Java Lambda/" class="archive-article-date">
   	<time datetime="2018-07-16T06:46:15.707Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-16</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/16/Java Lambda/">Java 流式写法</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本文列举了十个使用一行代码即可独立完成(不依赖其他代码)的业务逻辑，主要依赖的是Java8中的Lambda和Stream等新特性以及try-with-resources、JAXB等。</p>
+<ol>
+<li>对列表/数组中的每个元素都乘以2</li>
+</ol>
+<pre><code>// Range是半开区间
+int[] ia = range(1, 10).map(i -&gt; i * 2).toArray();
+List&lt;Integer&gt; result = range(1, 10).map(i -&gt; i * 2).boxed().collect(toList());
+</code></pre><p>2.计算集合/数组中的数字之和</p>
+<pre><code>range(1, 1000).sum();
+range(1, 1000).reduce(0, Integer::sum);
+Stream.iterate(0, i -&gt; i + 1).limit(1000).reduce(0, Integer::sum);
+IntStream.iterate(0, i -&gt; i + 1).limit(1000).reduce(0, Integer::sum);
+</code></pre><p>3.验证字符串是否包含集合中的某一字符串</p>
+<pre><code>final List&lt;String&gt; keywords = Arrays.asList(&quot;brown&quot;, &quot;fox&quot;, &quot;dog&quot;, &quot;pangram&quot;);
+final String tweet = &quot;The quick brown fox jumps over a lazy dog. #pangram http://www.rinkworks.com/words/pangrams.shtml&quot;;
 
-        <div class="article-info info-on-right">
-          
-          
+keywords.stream().anyMatch(tweet::contains);
+keywords.stream().reduce(false, (b, keyword) -&gt; b || tweet.contains(keyword), (l, r) -&gt; l || r);
+</code></pre><p>4.读取文件内容</p>
+<pre><code>原作者认为try with resources也是一种单行代码编程。
 
+try (BufferedReader reader = new BufferedReader(new FileReader(&quot;data.txt&quot;))) {
+  String fileText = reader.lines().reduce(&quot;&quot;, String::concat);
+}
+
+try (BufferedReader reader = new BufferedReader(new FileReader(&quot;data.txt&quot;))) {
+  List&lt;String&gt; fileLines = reader.lines().collect(toCollection(LinkedList&lt;String&gt;::new));
+}
+
+try (Stream&lt;String&gt; lines = Files.lines(new File(&quot;data.txt&quot;).toPath(), Charset.defaultCharset())) {
+  List&lt;String&gt; fileLines = lines.collect(toCollection(LinkedList&lt;String&gt;::new));
+}
+</code></pre><p>5.输出歌曲《Happy Birthday to You!》 – 根据集合中不同的元素输出不同的字符串</p>
+<pre><code>range(1, 5).boxed().map(i -&gt; { out.print(&quot;Happy Birthday &quot;); if (i == 3) return &quot;dear NAME&quot;; else return &quot;to You&quot;; }).forEach(out::println);
+
+</code></pre><p>6.过滤并分组集合中的数字</p>
+<pre><code>Map&lt;String, List&lt;Integer&gt;&gt; result = Stream.of(49, 58, 76, 82, 88, 90).collect(groupingBy(forPredicate(i -&gt; i &gt; 60, &quot;passed&quot;, &quot;failed&quot;)));
+
+</code></pre><p>7.获取并解析xml协议的Web Service</p>
+<pre><code>FeedType feed = JAXB.unmarshal(new URL(&quot;http://search.twitter.com/search.atom?&amp;q=java8&quot;), FeedType.class);
+JAXB.marshal(feed, System.out);
+
+</code></pre><p>8.获得集合中最小/最大的数字</p>
+<pre><code>int min = Stream.of(14, 35, -7, 46, 98).reduce(Integer::min).get();
+min = Stream.of(14, 35, -7, 46, 98).min(Integer::compare).get();
+min = Stream.of(14, 35, -7, 46, 98).mapToInt(Integer::new).min();
+
+int max = Stream.of(14, 35, -7, 46, 98).reduce(Integer::max).get();
+max = Stream.of(14, 35, -7, 46, 98).max(Integer::compare).get();
+max = Stream.of(14, 35, -7, 46, 98).mapToInt(Integer::new).max();
+</code></pre><p>9.并行处理</p>
+<pre><code>long result = dataList.parallelStream().mapToInt(line -&gt; processItem(line)).sum();
+</code></pre><p>10.集合上的各种查询(LINQ in Java)</p>
+<pre><code>List&lt;Album&gt; albums = Arrays.asList(unapologetic, tailgates, red);
+
+//筛选出至少有一个track评级4分以上的专辑，并按照名称排序后打印出来。
+albums.stream()
+  .filter(a -&gt; a.tracks.stream().anyMatch(t -&gt; (t.rating &gt;= 4)))
+  .sorted(comparing(album -&gt; album.name))
+  .forEach(album -&gt; System.out.println(album.name));
+
+//合并所有专辑的track
+List&lt;Track&gt; allTracks = albums.stream()
+  .flatMap(album -&gt; album.tracks.stream())
+  .collect(toList());
+
+//根据track的评分对所有track分组
+Map&lt;Integer, List&lt;Track&gt;&gt; tracksByRating = allTracks.stream()
+  .collect(groupingBy(Track::getRating));
+
+</code></pre>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/07/16/Java Lambda/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/04/薅流量/" class="archive-article-date">
-  	<time datetime="2018-07-04T09:27:04.603Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-04</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/07/04/薅流量/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">各个App薅流量(联通卡)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/04/薅流量/">各个App薅流量(联通卡)</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/04/SQL慢查询/" class="archive-article-date">
-  	<time datetime="2018-07-04T09:24:28.935Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/04/SQL慢查询/">SQL慢查询</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/04/SQL注意事项/" class="archive-article-date">
-  	<time datetime="2018-07-04T09:22:30.392Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/04/SQL注意事项/">SQL注意事项</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/04/JsonUtils工具/" class="archive-article-date">
-  	<time datetime="2018-07-04T06:36:36.743Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/04/JsonUtils工具/">JsonUtils工具</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/04/Lambda表达式/" class="archive-article-date">
-  	<time datetime="2018-07-04T06:32:02.720Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/04/Lambda表达式/">Lambda表达式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/04/善良/" class="archive-article-date">
-  	<time datetime="2018-07-04T04:03:30.213Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/04/善良/">善良</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/07/04/hello-world/" class="archive-article-date">
-  	<time datetime="2018-07-04T03:20:36.525Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-04</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/07/04/hello-world/">认知</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -429,8 +395,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
