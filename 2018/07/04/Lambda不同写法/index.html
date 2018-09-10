@@ -6,20 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>JsonUtils工具 | 辛植的博客</title>
+  <title>Lambda不同写法 | 辛植的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Json 转换为Model,采用ObjectMapper作为映射 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788">
-<meta name="keywords" content="Java">
+  <meta name="description" content="/**获取单词，并且去重**/     List&amp;lt;String&amp;gt; list = Arrays.asList(&amp;quot;hello welcome&amp;quot;, &amp;quot;world hello&amp;quot;, &amp;quot;hello world&amp;quot;,             &amp;quot;hello world welcome&amp;quot;);      //map和fl">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JsonUtils工具">
-<meta property="og:url" content="http://yoursite.com/2018/07/04/JsonUtils工具/index.html">
+<meta property="og:title" content="Lambda不同写法">
+<meta property="og:url" content="http://yoursite.com/2018/07/04/Lambda不同写法/index.html">
 <meta property="og:site_name" content="辛植的博客">
-<meta property="og:description" content="Json 转换为Model,采用ObjectMapper作为映射 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788">
+<meta property="og:description" content="/**获取单词，并且去重**/     List&amp;lt;String&amp;gt; list = Arrays.asList(&amp;quot;hello welcome&amp;quot;, &amp;quot;world hello&amp;quot;, &amp;quot;hello world&amp;quot;,             &amp;quot;hello world welcome&amp;quot;);      //map和fl">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-04T06:38:06.435Z">
+<meta property="og:updated_time" content="2018-09-10T05:53:49.018Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JsonUtils工具">
-<meta name="twitter:description" content="Json 转换为Model,采用ObjectMapper作为映射 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788">
+<meta name="twitter:title" content="Lambda不同写法">
+<meta name="twitter:description" content="/**获取单词，并且去重**/     List&amp;lt;String&amp;gt; list = Arrays.asList(&amp;quot;hello welcome&amp;quot;, &amp;quot;world hello&amp;quot;, &amp;quot;hello world&amp;quot;,             &amp;quot;hello world welcome&amp;quot;);      //map和fl">
   
     <link rel="alternative" href="/atom.xml" title="辛植的博客" type="application/atom+xml">
   
@@ -155,29 +154,59 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-JsonUtils工具" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Lambda不同写法" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      JsonUtils工具
+      Lambda不同写法
     </h1>
   
 
         
-        <a href="/2018/07/04/JsonUtils工具/" class="archive-article-date">
-  	<time datetime="2018-07-04T06:36:36.743Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-04</time>
+        <a href="/2018/07/04/Lambda不同写法/" class="archive-article-date">
+  	<time datetime="2018-07-04T09:22:30.392Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-04</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Json 转换为Model,采用ObjectMapper作为映射</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line">import com.fasterxml.jackson.annotation.JsonInclude.Include;</span><br><span class="line">import com.fasterxml.jackson.databind.DeserializationFeature;</span><br><span class="line">import com.fasterxml.jackson.databind.JavaType;</span><br><span class="line">import com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line">import com.fasterxml.jackson.databind.PropertyNamingStrategy;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.util.Collection;</span><br><span class="line">import java.util.Map;</span><br><span class="line">import org.apache.commons.lang3.StringUtils;</span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line">public class JsonUtils &#123;</span><br><span class="line">    private static Logger logger = LoggerFactory.getLogger(JsonUtils.class);</span><br><span class="line">    private static ObjectMapper defaultMapper = new ObjectMapper();</span><br><span class="line">    private static ObjectMapper snakeMapper;</span><br><span class="line"></span><br><span class="line">    public JsonUtils() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static String toJson(Object obj) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return obj == null ? null : defaultMapper.writeValueAsString(obj);</span><br><span class="line">        &#125; catch (IOException var2) &#123;</span><br><span class="line">            logger.error(&quot;[writeValueAsString]：&quot; + var2.getMessage(), var2);</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static String toJsonSnake(Object obj) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return obj == null ? null : snakeMapper.writeValueAsString(obj);</span><br><span class="line">        &#125; catch (IOException var2) &#123;</span><br><span class="line">            logger.error(&quot;[writeValueAsString]：&quot; + var2.getMessage(), var2);</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; T toObj(String json, Class&lt;T&gt; clazz) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return StringUtils.isEmpty(json) ? null : defaultMapper.readValue(json, clazz);</span><br><span class="line">        &#125; catch (IOException var3) &#123;</span><br><span class="line">            logger.error(&quot;[readValue]：&quot; + var3.getMessage(), var3);</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; T toObjSnake(String json, Class&lt;T&gt; clazz) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return StringUtils.isEmpty(json) ? null : snakeMapper.readValue(json, clazz);</span><br><span class="line">        &#125; catch (IOException var3) &#123;</span><br><span class="line">            logger.error(&quot;[readValue]：&quot; + var3.getMessage(), var3);</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; T toObj(String json, Class&lt;? extends Collection&gt; collectionClass, Class&lt;?&gt; elementClass) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            if (StringUtils.isEmpty(json)) &#123;</span><br><span class="line">                return null;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                JavaType javaType = defaultMapper.getTypeFactory().constructCollectionType(collectionClass, elementClass);</span><br><span class="line">                return defaultMapper.readValue(json, javaType);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException var4) &#123;</span><br><span class="line">            logger.error(&quot;[toObj]&quot; + var4.getMessage(), var4);</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; T toObj(String json, Class&lt;? extends Map&gt; mapClass, Class&lt;?&gt; keyClass, Class&lt;?&gt; valueClass) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            if (StringUtils.isEmpty(json)) &#123;</span><br><span class="line">                return null;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                JavaType javaType = defaultMapper.getTypeFactory().constructMapType(mapClass, keyClass, valueClass);</span><br><span class="line">                return defaultMapper.readValue(json, javaType);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException var5) &#123;</span><br><span class="line">            logger.error(&quot;[toObj]&quot; + var5.getMessage(), var5);</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static String formatJson(String json) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            if (json == null) &#123;</span><br><span class="line">                return null;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                Object obj = defaultMapper.readValue(json, Object.class);</span><br><span class="line">                return defaultMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception var2) &#123;</span><br><span class="line">            logger.error(&quot;[formatJson]：&quot; + var2.getMessage(), var2);</span><br><span class="line">            return json;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static &#123;</span><br><span class="line">        defaultMapper.setSerializationInclusion(Include.NON_NULL);</span><br><span class="line">        defaultMapper.setDateFormat(new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;));</span><br><span class="line">        defaultMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);</span><br><span class="line">        snakeMapper = new ObjectMapper();</span><br><span class="line">        snakeMapper.setSerializationInclusion(Include.NON_NULL);</span><br><span class="line">        snakeMapper.setDateFormat(new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;));</span><br><span class="line">        snakeMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);</span><br><span class="line">        snakeMapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <pre><code>    /**获取单词，并且去重**/
+    List&lt;String&gt; list = Arrays.asList(&quot;hello welcome&quot;, &quot;world hello&quot;, &quot;hello world&quot;,
+            &quot;hello world welcome&quot;);
 
+    //map和flatmap的区别
+    list.stream().map(item -&gt; Arrays.stream(item.split(&quot; &quot;))).distinct().collect(Collectors.toList()).forEach(System.out::println);
+    System.out.println(&quot;---------- &quot;);
+    list.stream().flatMap(item -&gt; Arrays.stream(item.split(&quot; &quot;))).distinct().collect(Collectors.toList()).forEach(System.out::println);
+
+    //实际上返回的类似是不同的
+    List&lt;Stream&lt;String&gt;&gt; listResult = list.stream().map(item -&gt; Arrays.stream(item.split(&quot; &quot;))).distinct().collect(Collectors.toList());
+    List&lt;String&gt; listResult2 = list.stream().flatMap(item -&gt; Arrays.stream(item.split(&quot; &quot;))).distinct().collect(Collectors.toList());
+
+    System.out.println(&quot;---------- &quot;);
+
+    //也可以这样
+    list.stream().map(item -&gt; item.split(&quot; &quot;)).flatMap(Arrays::stream).distinct().collect(Collectors.toList()).forEach(System.out::println);
+
+    System.out.println(&quot;================================================&quot;);
+
+    /**相互组合**/
+    List&lt;String&gt; list2 = Arrays.asList(&quot;hello&quot;, &quot;hi&quot;, &quot;你好&quot;);
+    List&lt;String&gt; list3 = Arrays.asList(&quot;zhangsan&quot;, &quot;lisi&quot;, &quot;wangwu&quot;, &quot;zhaoliu&quot;);
+
+    list2.stream().map(item -&gt; list3.stream().map(item2 -&gt; item + &quot; &quot; + item2)).collect(Collectors.toList()).forEach(System.out::println);
+    list2.stream().flatMap(item -&gt; list3.stream().map(item2 -&gt; item + &quot; &quot; + item2)).collect(Collectors.toList()).forEach(System.out::println);
+
+    //实际上返回的类似是不同的
+    List&lt;Stream&lt;String&gt;&gt; list2Result = list2.stream().map(item -&gt; list3.stream().map(item2 -&gt; item + &quot; &quot; + item2)).collect(Collectors.toList());
+    List&lt;String&gt; list2Result2 = list2.stream().flatMap(item -&gt; list3.stream().map(item2 -&gt; item + &quot; &quot; + item2)).collect(Collectors.toList());
+
+
+</code></pre>
       
 
       
@@ -206,17 +235,6 @@
     <div class="article-info article-info-index">
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Java</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
       
 
       
@@ -267,7 +285,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/07/04/JsonUtils工具/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/07/04/Lambda不同写法/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -281,18 +299,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/07/04/Lambda不同写法/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/07/04/SQL注意事项/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          Lambda不同写法
+          SQL注意事项
         
       </div>
     </a>
   
   
-    <a href="/2018/07/04/Lambda表达式/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Lambda表达式</div>
+    <a href="/2018/07/04/JsonUtils工具/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JsonUtils工具</div>
       <i class="icon-circle-right"></i>
     </a>
   

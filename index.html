@@ -511,6 +511,100 @@ Map&lt;Integer, List&lt;Track&gt;&gt; tracksByRating = allTracks.stream()
 
 
   
+    <article id="post-Lambda不同写法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/04/Lambda不同写法/">Lambda不同写法</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/04/Lambda不同写法/" class="archive-article-date">
+  	<time datetime="2018-07-04T09:22:30.392Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>    /**获取单词，并且去重**/
+    List&lt;String&gt; list = Arrays.asList(&quot;hello welcome&quot;, &quot;world hello&quot;, &quot;hello world&quot;,
+            &quot;hello world welcome&quot;);
+
+    //map和flatmap的区别
+    list.stream().map(item -&gt; Arrays.stream(item.split(&quot; &quot;))).distinct().collect(Collectors.toList()).forEach(System.out::println);
+    System.out.println(&quot;---------- &quot;);
+    list.stream().flatMap(item -&gt; Arrays.stream(item.split(&quot; &quot;))).distinct().collect(Collectors.toList()).forEach(System.out::println);
+
+    //实际上返回的类似是不同的
+    List&lt;Stream&lt;String&gt;&gt; listResult = list.stream().map(item -&gt; Arrays.stream(item.split(&quot; &quot;))).distinct().collect(Collectors.toList());
+    List&lt;String&gt; listResult2 = list.stream().flatMap(item -&gt; Arrays.stream(item.split(&quot; &quot;))).distinct().collect(Collectors.toList());
+
+    System.out.println(&quot;---------- &quot;);
+
+    //也可以这样
+    list.stream().map(item -&gt; item.split(&quot; &quot;)).flatMap(Arrays::stream).distinct().collect(Collectors.toList()).forEach(System.out::println);
+
+    System.out.println(&quot;================================================&quot;);
+
+    /**相互组合**/
+    List&lt;String&gt; list2 = Arrays.asList(&quot;hello&quot;, &quot;hi&quot;, &quot;你好&quot;);
+    List&lt;String&gt; list3 = Arrays.asList(&quot;zhangsan&quot;, &quot;lisi&quot;, &quot;wangwu&quot;, &quot;zhaoliu&quot;);
+
+    list2.stream().map(item -&gt; list3.stream().map(item2 -&gt; item + &quot; &quot; + item2)).collect(Collectors.toList()).forEach(System.out::println);
+    list2.stream().flatMap(item -&gt; list3.stream().map(item2 -&gt; item + &quot; &quot; + item2)).collect(Collectors.toList()).forEach(System.out::println);
+
+    //实际上返回的类似是不同的
+    List&lt;Stream&lt;String&gt;&gt; list2Result = list2.stream().map(item -&gt; list3.stream().map(item2 -&gt; item + &quot; &quot; + item2)).collect(Collectors.toList());
+    List&lt;String&gt; list2Result2 = list2.stream().flatMap(item -&gt; list3.stream().map(item2 -&gt; item + &quot; &quot; + item2)).collect(Collectors.toList());
+
+
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/04/Lambda不同写法/">more >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-JsonUtils工具" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
