@@ -967,6 +967,426 @@ Map&lt;Integer, List&lt;Track&gt;&gt; tracksByRating = allTracks.stream()
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/04/ObjUtils/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xin Zhi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="辛植的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/04/ObjUtils/" itemprop="url">基础类型转换</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T17:22:30+08:00">
+                2018-07-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>
+    import org.apache.commons.collections4.MapUtils;
+    import org.apache.commons.lang3.ArrayUtils;
+    import org.apache.commons.lang3.StringUtils;
+    import org.apache.commons.lang3.builder.ToStringBuilder;
+    import org.dozer.DozerBeanMapper;
+    import org.dozer.Mapper;
+
+    import java.math.BigDecimal;
+    import java.util.ArrayList;
+    import java.util.Collection;
+    import java.util.List;
+    import java.util.Map;
+
+    public class ObjUtils {
+
+    private static final String NULL_VALUE = &quot;NULL&quot;;
+    private static final String EMPTY_VALUE = &quot;&quot;;
+    private static final String COMMA = &quot;,&quot;;
+    private static final String BOOLEAN_TRUE = &quot;TRUE&quot;;
+    private static final String BOOLEAN_FALSE = &quot;FALSE&quot;;
+    private static final String BOOLEAN_T = &quot;T&quot;;
+    private static final String BOOLEAN_F = &quot;F&quot;;
+    private static final String BOOLEAN_Y = &quot;Y&quot;;
+    private static final String BOOLEAN_N = &quot;N&quot;;
+    private static final String BOOLEAN_1 = &quot;1&quot;;
+    private static final String BOOLEAN_0 = &quot;0&quot;;
+
+    private static Mapper mapper;
+
+    public static &lt;T&gt; T ifNull(T object, T defaultValue) {
+        return object == null ? defaultValue : object;
+    }
+
+    public static boolean isNull(Object value) {
+        if (value == null) {
+            return true;
+        } else if (value instanceof String &amp;&amp; NULL_VALUE.equalsIgnoreCase((String) value)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isEmpty(Object value) {
+        if (value == null) {
+            return true;
+        } else if (value instanceof String) {
+            if (StringUtils.isEmpty((String) value) || NULL_VALUE.equalsIgnoreCase((String) value)) {
+                return true;
+            }
+        } else if (value instanceof Collection &amp;&amp; CollectionUtils.isEmpty((Collection) value)) {
+            return true;
+        } else if (value instanceof Map &amp;&amp; MapUtils.isEmpty((Map) value)) {
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean isNotEmpty(Object value) {
+        return !isEmpty(value);
+    }
+
+    public static &lt;T&gt; boolean isEmpty(final T[] array) {
+        return ArrayUtils.isEmpty(array);
+    }
+
+    public static &lt;T&gt; boolean isNotEmpty(final T[] array) {
+        return ArrayUtils.isNotEmpty(array);
+    }
+
+    public static boolean isBlank(Object value) {
+        if (value == null) {
+            return true;
+        } else if (value instanceof String) {
+            if (StringUtils.isBlank((String) value) || NULL_VALUE.equalsIgnoreCase((String) value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isNotBlank(Object value) {
+        return !isBlank(value);
+    }
+
+    public static String toString(Object obj) {
+        if (obj == null) {
+            return null;
+        }
+        if (obj instanceof String) {
+            return (String) obj;
+        }
+        return obj.toString();
+    }
+
+    public static String toString(Object obj, String defaultValue) {
+        return ifNull(toString(obj), defaultValue);
+    }
+
+    public static String toStringTrim(Object obj) {
+        String value = toString(obj);
+        if (value == null) {
+            return null;
+        }
+        return value.trim();
+    }
+
+    public static String toStringTrim(Object obj, String defaultValue) {
+        return ifNull(toStringTrim(obj), defaultValue);
+    }
+
+    public static Integer toInteger(Object obj) {
+        if (isEmpty(obj)) {
+            return null;
+        }
+        if (obj instanceof Integer) {
+            return (Integer) obj;
+        }
+        if (obj instanceof Number) {
+            return ((Number) obj).intValue();
+        }
+        // 处理字符串值
+        String strValue = obj.toString().trim();
+        // 处理千分位
+        if (strValue.contains(COMMA)) {
+            strValue = strValue.replaceAll(COMMA, EMPTY_VALUE);
+        }
+        try {
+            return new BigDecimal(strValue).intValue();
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public static Integer toInteger(Object obj, Integer defaultValue) {
+        return ifNull(toInteger(obj), defaultValue);
+    }
+
+    public static Long toLong(Object obj) {
+        if (isEmpty(obj)) {
+            return null;
+        }
+        if (obj instanceof Long) {
+            return (Long) obj;
+        }
+        if (obj instanceof Number) {
+            return ((Number) obj).longValue();
+        }
+        // 处理字符串值
+        String strValue = obj.toString().trim();
+        // 处理千分位
+        if (strValue.contains(COMMA)) {
+            strValue = strValue.replaceAll(COMMA, EMPTY_VALUE);
+        }
+        try {
+            return new BigDecimal(strValue).longValue();
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public static Long toLong(Object obj, Long defaultValue) {
+        return ifNull(toLong(obj), defaultValue);
+    }
+
+    public static BigDecimal toBigDecimal(Object obj) {
+        if (isEmpty(obj)) {
+            return null;
+        }
+        if (obj instanceof BigDecimal) {
+            return (BigDecimal) obj;
+        }
+        // 处理字符串值
+        String strValue = obj.toString().trim();
+        // 处理千分位
+        if (strValue.contains(COMMA)) {
+            strValue = strValue.replaceAll(COMMA, EMPTY_VALUE);
+        }
+        try {
+            return new BigDecimal(strValue);
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public static BigDecimal toBigDecimal(Object obj, BigDecimal defaultValue) {
+        return ifNull(toBigDecimal(obj), defaultValue);
+    }
+
+    public static Boolean toBoolean(Object obj) {
+        if (isEmpty(obj)) {
+            return null;
+        }
+        if (obj instanceof Boolean) {
+            return (Boolean) obj;
+        }
+        if (obj instanceof Number) {
+            return Boolean.valueOf(((Number) obj).intValue() == 1);
+        }
+        // 处理字符串值
+        String strValue = obj.toString().trim();
+        if (BOOLEAN_TRUE.equalsIgnoreCase(strValue)
+                || BOOLEAN_T.equalsIgnoreCase(strValue)
+                || BOOLEAN_Y.equalsIgnoreCase(strValue)
+                || BOOLEAN_1.equals(strValue)) {
+            return Boolean.TRUE;
+        }
+        if (BOOLEAN_FALSE.equalsIgnoreCase(strValue)
+                || BOOLEAN_F.equalsIgnoreCase(strValue)
+                || BOOLEAN_N.equalsIgnoreCase(strValue)
+                || BOOLEAN_0.equals(strValue)) {
+            return Boolean.FALSE;
+        }
+        return null;
+    }
+
+    public static Boolean toBoolean(Object obj, Boolean defaultValue) {
+        return ifNull(toBoolean(obj), defaultValue);
+    }
+
+    public static boolean toboolean(Object obj) {
+        return toBoolean(obj, false);
+    }
+
+    public static Mapper getMapper() {
+        if (mapper == null) {
+            synchronized (ObjUtils.class) {
+                if (mapper == null) {
+                    mapper = new DozerBeanMapper();
+                }
+            }
+        }
+        return mapper;
+    }
+
+    public static void map(Object source, Object destination) {
+        getMapper().map(source, destination);
+    }
+
+    public static &lt;T&gt; T map(Object source, Class&lt;T&gt; destinationClass) {
+        return getMapper().map(source, destinationClass);
+    }
+
+    public static String prop2String(Object obj) {
+        if (obj == null) {
+            return null;
+        }
+        return ToStringBuilder.reflectionToString(obj);
+    }
+
+    public static Integer[] string2IntAry(String str, String separatorChars, Integer defaultValue) {
+        if (isBlank(str)) {
+            return null;
+        }
+        String[] strAry = StringUtils.split(str, separatorChars);
+        Integer[] intAry = new Integer[strAry.length];
+        for (int i = 0; i &lt; strAry.length; i++) {
+            intAry[i] = toInteger(strAry[i], defaultValue);
+        }
+        return intAry;
+    }
+
+    public static List&lt;Integer&gt; string2IntList(String str, String separatorChars, Integer defaultValue) {
+        if (isBlank(str)) {
+            return new ArrayList&lt;Integer&gt;(1);
+        }
+        String[] strAry = StringUtils.split(str, separatorChars);
+        List&lt;Integer&gt; intList = new ArrayList&lt;Integer&gt;(strAry.length);
+        for (int i = 0; i &lt; strAry.length; i++) {
+            intList.add(toInteger(strAry[i], defaultValue));
+        }
+        return intList;
+    }
+
+    public static Long[] string2LongAry(String str, String separatorChars, Long defaultValue) {
+        if (isBlank(str)) {
+            return null;
+        }
+        String[] strAry = StringUtils.split(str, separatorChars);
+        Long[] longAry = new Long[strAry.length];
+        for (int i = 0; i &lt; strAry.length; i++) {
+            longAry[i] = toLong(strAry[i], defaultValue);
+        }
+        return longAry;
+    }
+
+    public static List&lt;Long&gt; string2LongList(String str, String separatorChars, Long defaultValue) {
+        if (isBlank(str)) {
+            return new ArrayList&lt;Long&gt;(1);
+        }
+        String[] strAry = StringUtils.split(str, separatorChars);
+        List&lt;Long&gt; longList = new ArrayList&lt;Long&gt;(strAry.length);
+        for (int i = 0; i &lt; strAry.length; i++) {
+            longList.add(toLong(strAry[i], defaultValue));
+        }
+        return longList;
+    }
+
+    }
+
+
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/04/JsonUtils工具/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1511,7 +1931,7 @@ Map&lt;Integer, List&lt;Track&gt;&gt; tracksByRating = allTracks.stream()
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1561,7 +1981,7 @@ Map&lt;Integer, List&lt;Track&gt;&gt; tracksByRating = allTracks.stream()
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
