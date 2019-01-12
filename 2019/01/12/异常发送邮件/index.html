@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="如果你的道德观念不是源于你自己对自己的要求，而来自对他人的迎合、对自身利益的计算、对自私自爱等欲望的满足，那么这些“他律”支配的行为通通都称不上真正的道德，充其量是一种“伪善”。   别人说的话，不要轻易相信，要学会印证。">
+<meta name="description" content="public class DefaultHttpExceptionHandler implements HttpExceptionHandler {     private static final Logger logger = LoggerFactory.getLogger(DefaultHttpExceptionHandler.class);     private static fina">
 <meta property="og:type" content="article">
-<meta property="og:title" content="善良">
-<meta property="og:url" content="http://yoursite.com/2018/07/04/善良/index.html">
+<meta property="og:title" content="异常发送邮件">
+<meta property="og:url" content="http://yoursite.com/2019/01/12/异常发送邮件/index.html">
 <meta property="og:site_name" content="辛植的博客">
-<meta property="og:description" content="如果你的道德观念不是源于你自己对自己的要求，而来自对他人的迎合、对自身利益的计算、对自私自爱等欲望的满足，那么这些“他律”支配的行为通通都称不上真正的道德，充其量是一种“伪善”。   别人说的话，不要轻易相信，要学会印证。">
+<meta property="og:description" content="public class DefaultHttpExceptionHandler implements HttpExceptionHandler {     private static final Logger logger = LoggerFactory.getLogger(DefaultHttpExceptionHandler.class);     private static fina">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-07-04T04:07:10.932Z">
+<meta property="og:updated_time" content="2019-01-12T09:01:54.339Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="善良">
-<meta name="twitter:description" content="如果你的道德观念不是源于你自己对自己的要求，而来自对他人的迎合、对自身利益的计算、对自私自爱等欲望的满足，那么这些“他律”支配的行为通通都称不上真正的道德，充其量是一种“伪善”。   别人说的话，不要轻易相信，要学会印证。">
+<meta name="twitter:title" content="异常发送邮件">
+<meta name="twitter:description" content="public class DefaultHttpExceptionHandler implements HttpExceptionHandler {     private static final Logger logger = LoggerFactory.getLogger(DefaultHttpExceptionHandler.class);     private static fina">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/04/善良/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/12/异常发送邮件/"/>
 
 
 
 
 
-  <title>善良 | 辛植的博客</title>
+  <title>异常发送邮件 | 辛植的博客</title>
   
 
 
@@ -232,7 +232,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/04/善良/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/异常发送邮件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xin Zhi">
@@ -249,7 +249,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">善良</h1>
+          <h1 class="post-title" itemprop="name headline">异常发送邮件</h1>
         
 
         <div class="post-meta">
@@ -261,8 +261,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T12:03:30+08:00">
-                2018-07-04
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-12T17:00:19+08:00">
+                2019-01-12
               </time>
             
 
@@ -299,13 +299,75 @@
       
 
       
-        <blockquote>
-<p>如果你的道德观念不是源于你自己对自己的要求，而来自对他人的迎合、对自身利益的计算、对自私自爱等欲望的满足，那么这些“他律”支配的行为通通都称不上真正的道德，充其量是一种“伪善”。</p>
-</blockquote>
-<blockquote>
-<p>别人说的话，不要轻易相信，要学会印证。</p>
-</blockquote>
+        <pre><code>
+public class DefaultHttpExceptionHandler implements HttpExceptionHandler {
+    private static final Logger logger = LoggerFactory.getLogger(DefaultHttpExceptionHandler.class);
+    private static final int EXCEPTION_SWITH = PropertyUtils.getInt(&quot;exception.remind.switch&quot;, 1);
+    private static final String EXCEPTION_PROJECT = PropertyUtils.getString(&quot;exception.remind.project&quot;, &quot;not set&quot;);
+    private static final String EXCEPTION_PROFILE = PropertyUtils.getString(&quot;exception.remind.profile&quot;, &quot;prod&quot;);
+    private static final String LOCAL_IP = StrUtils.getLocalHostAddress();
 
+    public DefaultHttpExceptionHandler() {
+    }
+
+    public void exceptionHandle(HttpRequest request, HttpResponse response, Exception exception) {
+        try {
+            SecurityUtils.getSubject().logout();
+        } catch (Exception var5) {
+            ;
+        }
+
+        if (!(exception instanceof AuthenticationException) &amp;&amp; !(exception instanceof UnauthenticatedException) &amp;&amp; !(exception.getCause() instanceof AuthenticationException) &amp;&amp; !(exception.getCause() instanceof UnauthenticatedException)) {
+            if (!(exception instanceof UnauthorizedException) &amp;&amp; !(exception.getCause() instanceof UnauthorizedException)) {
+                if (exception instanceof FinhubException) {
+                    ResponseResultUtils.fail(response, (FinhubException)exception);
+                } else if (exception.getCause() != null &amp;&amp; exception.getCause() instanceof FinhubException) {
+                    ResponseResultUtils.fail(response, (FinhubException)exception.getCause());
+                } else if (exception.getCause() != null &amp;&amp; exception.getCause() instanceof ValidateException) {
+                    ResponseResultUtils.fail(response, new FinhubException(600, exception.getCause().getMessage()));
+                } else {
+                    FinhubLogger.error(&quot;内部错误&quot;, new Object[]{exception});
+                    logger.error(ExceptionUtils.getErrorMessageWithNestedException(exception), exception);
+                    this.exceptionRemind(request, exception);
+                    ResponseResultUtils.exception(response);
+                }
+            } else {
+                ResponseResultUtils.fail(response, new FinhubException(403));
+            }
+        } else {
+            ResponseResultUtils.fail(response, new FinhubException(401));
+        }
+
+    }
+
+    protected void exceptionRemind(HttpRequest request, Exception exception) {
+        try {
+            if (EXCEPTION_SWITH == 0) {
+                return;
+            }
+
+            String url = &quot;http://harmony-dev.fenbeijinfu.com/harmony/mail/inner&quot;;
+            Map&lt;String, Object&gt; content = Maps.newLinkedHashMap();
+            content.put(&quot;toList&quot;, Lists.newArrayList(new String[]{&quot;rd@fenbeitong.com&quot;}));
+            content.put(&quot;subject&quot;, StrUtils.formatString(&quot;项目【{0}】【{1}】【{2}】发生内部错误&quot;, new Object[]{EXCEPTION_PROJECT, EXCEPTION_PROFILE, LOCAL_IP}));
+            StringBuffer text = new StringBuffer();
+            text.append(&quot;requestId：&quot;).append(request.getRequestId()).append(&quot;\n&quot;);
+            text.append(&quot;requestURI：&quot;).append(request.getUri()).append(&quot;\n&quot;);
+            if (exception.getCause() != null &amp;&amp; exception.getCause() instanceof Exception) {
+                exception = (Exception)exception.getCause();
+            }
+
+            text.append(&quot;exception：&quot;).append(ExceptionUtils.getStackTraceAsString(exception));
+            content.put(&quot;text&quot;, text.toString());
+            HttpClientUtils.postBody(url, JSON.toJSONString(content));
+        } catch (Exception var6) {
+            logger.error(&quot;发送异常邮件异常：&quot; + var6.getMessage(), var6);
+        }
+
+    }
+}
+
+</code></pre>
       
     </div>
     
@@ -329,8 +391,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/04/hello-world/" rel="next" title="认知">
-                <i class="fa fa-chevron-left"></i> 认知
+              <a href="/2018/07/16/Java Lambda/" rel="next" title="Java 流式写法">
+                <i class="fa fa-chevron-left"></i> Java 流式写法
               </a>
             
           </div>
@@ -338,10 +400,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/04/Lambda表达式/" rel="prev" title="Lambda表达式">
-                Lambda表达式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>

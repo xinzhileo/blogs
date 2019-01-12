@@ -232,6 +232,193 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/12/异常发送邮件/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xin Zhi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="辛植的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/12/异常发送邮件/" itemprop="url">异常发送邮件</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-12T17:00:19+08:00">
+                2019-01-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>
+public class DefaultHttpExceptionHandler implements HttpExceptionHandler {
+    private static final Logger logger = LoggerFactory.getLogger(DefaultHttpExceptionHandler.class);
+    private static final int EXCEPTION_SWITH = PropertyUtils.getInt(&quot;exception.remind.switch&quot;, 1);
+    private static final String EXCEPTION_PROJECT = PropertyUtils.getString(&quot;exception.remind.project&quot;, &quot;not set&quot;);
+    private static final String EXCEPTION_PROFILE = PropertyUtils.getString(&quot;exception.remind.profile&quot;, &quot;prod&quot;);
+    private static final String LOCAL_IP = StrUtils.getLocalHostAddress();
+
+    public DefaultHttpExceptionHandler() {
+    }
+
+    public void exceptionHandle(HttpRequest request, HttpResponse response, Exception exception) {
+        try {
+            SecurityUtils.getSubject().logout();
+        } catch (Exception var5) {
+            ;
+        }
+
+        if (!(exception instanceof AuthenticationException) &amp;&amp; !(exception instanceof UnauthenticatedException) &amp;&amp; !(exception.getCause() instanceof AuthenticationException) &amp;&amp; !(exception.getCause() instanceof UnauthenticatedException)) {
+            if (!(exception instanceof UnauthorizedException) &amp;&amp; !(exception.getCause() instanceof UnauthorizedException)) {
+                if (exception instanceof FinhubException) {
+                    ResponseResultUtils.fail(response, (FinhubException)exception);
+                } else if (exception.getCause() != null &amp;&amp; exception.getCause() instanceof FinhubException) {
+                    ResponseResultUtils.fail(response, (FinhubException)exception.getCause());
+                } else if (exception.getCause() != null &amp;&amp; exception.getCause() instanceof ValidateException) {
+                    ResponseResultUtils.fail(response, new FinhubException(600, exception.getCause().getMessage()));
+                } else {
+                    FinhubLogger.error(&quot;内部错误&quot;, new Object[]{exception});
+                    logger.error(ExceptionUtils.getErrorMessageWithNestedException(exception), exception);
+                    this.exceptionRemind(request, exception);
+                    ResponseResultUtils.exception(response);
+                }
+            } else {
+                ResponseResultUtils.fail(response, new FinhubException(403));
+            }
+        } else {
+            ResponseResultUtils.fail(response, new FinhubException(401));
+        }
+
+    }
+
+    protected void exceptionRemind(HttpRequest request, Exception exception) {
+        try {
+            if (EXCEPTION_SWITH == 0) {
+                return;
+            }
+
+            String url = &quot;http://harmony-dev.fenbeijinfu.com/harmony/mail/inner&quot;;
+            Map&lt;String, Object&gt; content = Maps.newLinkedHashMap();
+            content.put(&quot;toList&quot;, Lists.newArrayList(new String[]{&quot;rd@fenbeitong.com&quot;}));
+            content.put(&quot;subject&quot;, StrUtils.formatString(&quot;项目【{0}】【{1}】【{2}】发生内部错误&quot;, new Object[]{EXCEPTION_PROJECT, EXCEPTION_PROFILE, LOCAL_IP}));
+            StringBuffer text = new StringBuffer();
+            text.append(&quot;requestId：&quot;).append(request.getRequestId()).append(&quot;\n&quot;);
+            text.append(&quot;requestURI：&quot;).append(request.getUri()).append(&quot;\n&quot;);
+            if (exception.getCause() != null &amp;&amp; exception.getCause() instanceof Exception) {
+                exception = (Exception)exception.getCause();
+            }
+
+            text.append(&quot;exception：&quot;).append(ExceptionUtils.getStackTraceAsString(exception));
+            content.put(&quot;text&quot;, text.toString());
+            HttpClientUtils.postBody(url, JSON.toJSONString(content));
+        } catch (Exception var6) {
+            logger.error(&quot;发送异常邮件异常：&quot; + var6.getMessage(), var6);
+        }
+
+    }
+}
+
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/16/Java Lambda/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1751,143 +1938,13 @@ Map&lt;Integer, List&lt;Track&gt;&gt; tracksByRating = allTracks.stream()
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/04/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xin Zhi">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="辛植的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/04/hello-world/" itemprop="url">认知</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-04T11:20:36+08:00">
-                2018-07-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>当我们决定做任何事之前，我们是不是早就知道我们将要做出的决定呢？比如说当我们将要见一个陌生人，我们对这个人的第一印象是在接触之后形成，还是在见面之前听他人描述这个人时就已经形成呢？</p>
-</blockquote>
-<blockquote>
-<p>当我们进行重大事务的决策时，我们总会认为我们的决定是经过自己的深思熟虑而做出的，但是事实真的如此么？</p>
-</blockquote>
-<blockquote>
-<p>我们每天都见到不同的人，遇见不同的事，我们都认为自己有一个“开放包容”的心，但是我们的本能，却让这“开放包容”变得很难完全实现。</p>
-</blockquote>
-<blockquote>
-<p>因为不管有意识无意识，至少在最初阶段，我们都会从本能地将不符合或不支持我们自己观点的信息筛选排除。这就是我们常说的认知偏差。</p>
-</blockquote>
-<blockquote>
-<p>而这些认知偏差，影响着我们的生活中的方方面面，金融，健康，政治，科学等等，都无法避免这些认知偏差。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1931,7 +1988,7 @@ Map&lt;Integer, List&lt;Track&gt;&gt; tracksByRating = allTracks.stream()
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
