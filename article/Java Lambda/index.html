@@ -18,7 +18,7 @@
         
     </title>
 
-    <link rel="canonical" href="http://www.huweihuang.com/article/Java Lambda/">
+    <link rel="canonical" href="http://www.xiaxue.online/article/Java Lambda/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -134,6 +134,30 @@
                     </li>
 
                     
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
                     
                 </ul>
             </div>
@@ -190,73 +214,26 @@
 <ol>
 <li>对列表/数组中的每个元素都乘以2</li>
 </ol>
-<pre><code>// Range是半开区间
-int[] ia = range(1, 10).map(i -&gt; i * 2).toArray();
-List&lt;Integer&gt; result = range(1, 10).map(i -&gt; i * 2).boxed().collect(toList());
-</code></pre><p>2.计算集合/数组中的数字之和</p>
-<pre><code>range(1, 1000).sum();
-range(1, 1000).reduce(0, Integer::sum);
-Stream.iterate(0, i -&gt; i + 1).limit(1000).reduce(0, Integer::sum);
-IntStream.iterate(0, i -&gt; i + 1).limit(1000).reduce(0, Integer::sum);
-</code></pre><p>3.验证字符串是否包含集合中的某一字符串</p>
-<pre><code>final List&lt;String&gt; keywords = Arrays.asList(&quot;brown&quot;, &quot;fox&quot;, &quot;dog&quot;, &quot;pangram&quot;);
-final String tweet = &quot;The quick brown fox jumps over a lazy dog. #pangram http://www.rinkworks.com/words/pangrams.shtml&quot;;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// Range是半开区间</span><br><span class="line">int[] ia = range(1, 10).map(i -&gt; i * 2).toArray();</span><br><span class="line">List&lt;Integer&gt; result = range(1, 10).map(i -&gt; i * 2).boxed().collect(toList());</span><br></pre></td></tr></table></figure>
+<p>2.计算集合/数组中的数字之和</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">range(1, 1000).sum();</span><br><span class="line">range(1, 1000).reduce(0, Integer::sum);</span><br><span class="line">Stream.iterate(0, i -&gt; i + 1).limit(1000).reduce(0, Integer::sum);</span><br><span class="line">IntStream.iterate(0, i -&gt; i + 1).limit(1000).reduce(0, Integer::sum);</span><br></pre></td></tr></table></figure>
+<p>3.验证字符串是否包含集合中的某一字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">final List&lt;String&gt; keywords = Arrays.asList(&quot;brown&quot;, &quot;fox&quot;, &quot;dog&quot;, &quot;pangram&quot;);</span><br><span class="line">final String tweet = &quot;The quick brown fox jumps over a lazy dog. #pangram http://www.rinkworks.com/words/pangrams.shtml&quot;;</span><br><span class="line"></span><br><span class="line">keywords.stream().anyMatch(tweet::contains);</span><br><span class="line">keywords.stream().reduce(false, (b, keyword) -&gt; b || tweet.contains(keyword), (l, r) -&gt; l || r);</span><br></pre></td></tr></table></figure>
+<p>4.读取文件内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">原作者认为try with resources也是一种单行代码编程。</span><br><span class="line"></span><br><span class="line">try (BufferedReader reader = new BufferedReader(new FileReader(&quot;data.txt&quot;))) &#123;</span><br><span class="line">  String fileText = reader.lines().reduce(&quot;&quot;, String::concat);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">try (BufferedReader reader = new BufferedReader(new FileReader(&quot;data.txt&quot;))) &#123;</span><br><span class="line">  List&lt;String&gt; fileLines = reader.lines().collect(toCollection(LinkedList&lt;String&gt;::new));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">try (Stream&lt;String&gt; lines = Files.lines(new File(&quot;data.txt&quot;).toPath(), Charset.defaultCharset())) &#123;</span><br><span class="line">  List&lt;String&gt; fileLines = lines.collect(toCollection(LinkedList&lt;String&gt;::new));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>5.输出歌曲《Happy Birthday to You!》 – 根据集合中不同的元素输出不同的字符串</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">range(1, 5).boxed().map(i -&gt; &#123; out.print(&quot;Happy Birthday &quot;); if (i == 3) return &quot;dear NAME&quot;; else return &quot;to You&quot;; &#125;).forEach(out::println);</span><br></pre></td></tr></table></figure>
+<p>6.过滤并分组集合中的数字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, List&lt;Integer&gt;&gt; result = Stream.of(49, 58, 76, 82, 88, 90).collect(groupingBy(forPredicate(i -&gt; i &gt; 60, &quot;passed&quot;, &quot;failed&quot;)));</span><br></pre></td></tr></table></figure>
+<p>7.获取并解析xml协议的Web Service</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FeedType feed = JAXB.unmarshal(new URL(&quot;http://search.twitter.com/search.atom?&amp;q=java8&quot;), FeedType.class);</span><br><span class="line">JAXB.marshal(feed, System.out);</span><br></pre></td></tr></table></figure>
+<p>8.获得集合中最小/最大的数字</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int min = Stream.of(14, 35, -7, 46, 98).reduce(Integer::min).get();</span><br><span class="line">min = Stream.of(14, 35, -7, 46, 98).min(Integer::compare).get();</span><br><span class="line">min = Stream.of(14, 35, -7, 46, 98).mapToInt(Integer::new).min();</span><br><span class="line"></span><br><span class="line">int max = Stream.of(14, 35, -7, 46, 98).reduce(Integer::max).get();</span><br><span class="line">max = Stream.of(14, 35, -7, 46, 98).max(Integer::compare).get();</span><br><span class="line">max = Stream.of(14, 35, -7, 46, 98).mapToInt(Integer::new).max();</span><br></pre></td></tr></table></figure>
+<p>9.并行处理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">long result = dataList.parallelStream().mapToInt(line -&gt; processItem(line)).sum();</span><br></pre></td></tr></table></figure>
+<p>10.集合上的各种查询(LINQ in Java)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Album&gt; albums = Arrays.asList(unapologetic, tailgates, red);</span><br><span class="line"></span><br><span class="line">//筛选出至少有一个track评级4分以上的专辑，并按照名称排序后打印出来。</span><br><span class="line">albums.stream()</span><br><span class="line">  .filter(a -&gt; a.tracks.stream().anyMatch(t -&gt; (t.rating &gt;= 4)))</span><br><span class="line">  .sorted(comparing(album -&gt; album.name))</span><br><span class="line">  .forEach(album -&gt; System.out.println(album.name));</span><br><span class="line"></span><br><span class="line">//合并所有专辑的track</span><br><span class="line">List&lt;Track&gt; allTracks = albums.stream()</span><br><span class="line">  .flatMap(album -&gt; album.tracks.stream())</span><br><span class="line">  .collect(toList());</span><br><span class="line"></span><br><span class="line">//根据track的评分对所有track分组</span><br><span class="line">Map&lt;Integer, List&lt;Track&gt;&gt; tracksByRating = allTracks.stream()</span><br><span class="line">  .collect(groupingBy(Track::getRating));</span><br></pre></td></tr></table></figure>
 
-keywords.stream().anyMatch(tweet::contains);
-keywords.stream().reduce(false, (b, keyword) -&gt; b || tweet.contains(keyword), (l, r) -&gt; l || r);
-</code></pre><p>4.读取文件内容</p>
-<pre><code>原作者认为try with resources也是一种单行代码编程。
-
-try (BufferedReader reader = new BufferedReader(new FileReader(&quot;data.txt&quot;))) {
-  String fileText = reader.lines().reduce(&quot;&quot;, String::concat);
-}
-
-try (BufferedReader reader = new BufferedReader(new FileReader(&quot;data.txt&quot;))) {
-  List&lt;String&gt; fileLines = reader.lines().collect(toCollection(LinkedList&lt;String&gt;::new));
-}
-
-try (Stream&lt;String&gt; lines = Files.lines(new File(&quot;data.txt&quot;).toPath(), Charset.defaultCharset())) {
-  List&lt;String&gt; fileLines = lines.collect(toCollection(LinkedList&lt;String&gt;::new));
-}
-</code></pre><p>5.输出歌曲《Happy Birthday to You!》 – 根据集合中不同的元素输出不同的字符串</p>
-<pre><code>range(1, 5).boxed().map(i -&gt; { out.print(&quot;Happy Birthday &quot;); if (i == 3) return &quot;dear NAME&quot;; else return &quot;to You&quot;; }).forEach(out::println);
-
-</code></pre><p>6.过滤并分组集合中的数字</p>
-<pre><code>Map&lt;String, List&lt;Integer&gt;&gt; result = Stream.of(49, 58, 76, 82, 88, 90).collect(groupingBy(forPredicate(i -&gt; i &gt; 60, &quot;passed&quot;, &quot;failed&quot;)));
-
-</code></pre><p>7.获取并解析xml协议的Web Service</p>
-<pre><code>FeedType feed = JAXB.unmarshal(new URL(&quot;http://search.twitter.com/search.atom?&amp;q=java8&quot;), FeedType.class);
-JAXB.marshal(feed, System.out);
-
-</code></pre><p>8.获得集合中最小/最大的数字</p>
-<pre><code>int min = Stream.of(14, 35, -7, 46, 98).reduce(Integer::min).get();
-min = Stream.of(14, 35, -7, 46, 98).min(Integer::compare).get();
-min = Stream.of(14, 35, -7, 46, 98).mapToInt(Integer::new).min();
-
-int max = Stream.of(14, 35, -7, 46, 98).reduce(Integer::max).get();
-max = Stream.of(14, 35, -7, 46, 98).max(Integer::compare).get();
-max = Stream.of(14, 35, -7, 46, 98).mapToInt(Integer::new).max();
-</code></pre><p>9.并行处理</p>
-<pre><code>long result = dataList.parallelStream().mapToInt(line -&gt; processItem(line)).sum();
-</code></pre><p>10.集合上的各种查询(LINQ in Java)</p>
-<pre><code>List&lt;Album&gt; albums = Arrays.asList(unapologetic, tailgates, red);
-
-//筛选出至少有一个track评级4分以上的专辑，并按照名称排序后打印出来。
-albums.stream()
-  .filter(a -&gt; a.tracks.stream().anyMatch(t -&gt; (t.rating &gt;= 4)))
-  .sorted(comparing(album -&gt; album.name))
-  .forEach(album -&gt; System.out.println(album.name));
-
-//合并所有专辑的track
-List&lt;Track&gt; allTracks = albums.stream()
-  .flatMap(album -&gt; album.tracks.stream())
-  .collect(toList());
-
-//根据track的评分对所有track分组
-Map&lt;Integer, List&lt;Track&gt;&gt; tracksByRating = allTracks.stream()
-  .collect(groupingBy(Track::getRating));
-
-</code></pre>
                 
 
                 <hr>
@@ -398,7 +375,7 @@ Map&lt;Integer, List&lt;Track&gt;&gt; tracksByRating = allTracks.stream()
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/huweihuang">
+                        <a target="_blank"  href="https://github.com/xinzhileo">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -474,7 +451,7 @@ Map&lt;Integer, List&lt;Track&gt;&gt; tracksByRating = allTracks.stream()
 <script>
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
-        async("http://www.huweihuang.com/js/jquery.tagcloud.js",function(){
+        async("http://www.xiaxue.online/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},
@@ -539,7 +516,7 @@ Map&lt;Integer, List&lt;Track&gt;&gt; tracksByRating = allTracks.stream()
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
     <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
 <!-- Image to hack wechat -->
-<img src="http://www.huweihuang.com/img/icon_wechat.png" width="0" height="0" />
+<img src="http://www.xiaxue.online/img/icon_wechat.png" width="0" height="0" />
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

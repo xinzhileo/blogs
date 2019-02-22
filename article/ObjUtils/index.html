@@ -18,7 +18,7 @@
         
     </title>
 
-    <link rel="canonical" href="http://www.huweihuang.com/article/ObjUtils/">
+    <link rel="canonical" href="http://www.xiaxue.online/article/ObjUtils/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -134,6 +134,30 @@
                     </li>
 
                     
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
                     
                 </ul>
             </div>
@@ -186,308 +210,8 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <pre><code>
-    import org.apache.commons.collections4.MapUtils;
-    import org.apache.commons.lang3.ArrayUtils;
-    import org.apache.commons.lang3.StringUtils;
-    import org.apache.commons.lang3.builder.ToStringBuilder;
-    import org.dozer.DozerBeanMapper;
-    import org.dozer.Mapper;
+                <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">import org.apache.commons.collections4.MapUtils;</span><br><span class="line">import org.apache.commons.lang3.ArrayUtils;</span><br><span class="line">import org.apache.commons.lang3.StringUtils;</span><br><span class="line">import org.apache.commons.lang3.builder.ToStringBuilder;</span><br><span class="line">import org.dozer.DozerBeanMapper;</span><br><span class="line">import org.dozer.Mapper;</span><br><span class="line"></span><br><span class="line">import java.math.BigDecimal;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.Collection;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.Map;</span><br><span class="line"></span><br><span class="line">public class ObjUtils &#123;</span><br><span class="line"></span><br><span class="line">private static final String NULL_VALUE = &quot;NULL&quot;;</span><br><span class="line">private static final String EMPTY_VALUE = &quot;&quot;;</span><br><span class="line">private static final String COMMA = &quot;,&quot;;</span><br><span class="line">private static final String BOOLEAN_TRUE = &quot;TRUE&quot;;</span><br><span class="line">private static final String BOOLEAN_FALSE = &quot;FALSE&quot;;</span><br><span class="line">private static final String BOOLEAN_T = &quot;T&quot;;</span><br><span class="line">private static final String BOOLEAN_F = &quot;F&quot;;</span><br><span class="line">private static final String BOOLEAN_Y = &quot;Y&quot;;</span><br><span class="line">private static final String BOOLEAN_N = &quot;N&quot;;</span><br><span class="line">private static final String BOOLEAN_1 = &quot;1&quot;;</span><br><span class="line">private static final String BOOLEAN_0 = &quot;0&quot;;</span><br><span class="line"></span><br><span class="line">private static Mapper mapper;</span><br><span class="line"></span><br><span class="line">public static &lt;T&gt; T ifNull(T object, T defaultValue) &#123;</span><br><span class="line">    return object == null ? defaultValue : object;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static boolean isNull(Object value) &#123;</span><br><span class="line">    if (value == null) &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125; else if (value instanceof String &amp;&amp; NULL_VALUE.equalsIgnoreCase((String) value)) &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static boolean isEmpty(Object value) &#123;</span><br><span class="line">    if (value == null) &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125; else if (value instanceof String) &#123;</span><br><span class="line">        if (StringUtils.isEmpty((String) value) || NULL_VALUE.equalsIgnoreCase((String) value)) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; else if (value instanceof Collection &amp;&amp; CollectionUtils.isEmpty((Collection) value)) &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125; else if (value instanceof Map &amp;&amp; MapUtils.isEmpty((Map) value)) &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static boolean isNotEmpty(Object value) &#123;</span><br><span class="line">    return !isEmpty(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static &lt;T&gt; boolean isEmpty(final T[] array) &#123;</span><br><span class="line">    return ArrayUtils.isEmpty(array);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static &lt;T&gt; boolean isNotEmpty(final T[] array) &#123;</span><br><span class="line">    return ArrayUtils.isNotEmpty(array);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static boolean isBlank(Object value) &#123;</span><br><span class="line">    if (value == null) &#123;</span><br><span class="line">        return true;</span><br><span class="line">    &#125; else if (value instanceof String) &#123;</span><br><span class="line">        if (StringUtils.isBlank((String) value) || NULL_VALUE.equalsIgnoreCase((String) value)) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static boolean isNotBlank(Object value) &#123;</span><br><span class="line">    return !isBlank(value);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static String toString(Object obj) &#123;</span><br><span class="line">    if (obj == null) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    if (obj instanceof String) &#123;</span><br><span class="line">        return (String) obj;</span><br><span class="line">    &#125;</span><br><span class="line">    return obj.toString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static String toString(Object obj, String defaultValue) &#123;</span><br><span class="line">    return ifNull(toString(obj), defaultValue);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static String toStringTrim(Object obj) &#123;</span><br><span class="line">    String value = toString(obj);</span><br><span class="line">    if (value == null) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    return value.trim();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static String toStringTrim(Object obj, String defaultValue) &#123;</span><br><span class="line">    return ifNull(toStringTrim(obj), defaultValue);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static Integer toInteger(Object obj) &#123;</span><br><span class="line">    if (isEmpty(obj)) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    if (obj instanceof Integer) &#123;</span><br><span class="line">        return (Integer) obj;</span><br><span class="line">    &#125;</span><br><span class="line">    if (obj instanceof Number) &#123;</span><br><span class="line">        return ((Number) obj).intValue();</span><br><span class="line">    &#125;</span><br><span class="line">    // 处理字符串值</span><br><span class="line">    String strValue = obj.toString().trim();</span><br><span class="line">    // 处理千分位</span><br><span class="line">    if (strValue.contains(COMMA)) &#123;</span><br><span class="line">        strValue = strValue.replaceAll(COMMA, EMPTY_VALUE);</span><br><span class="line">    &#125;</span><br><span class="line">    try &#123;</span><br><span class="line">        return new BigDecimal(strValue).intValue();</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static Integer toInteger(Object obj, Integer defaultValue) &#123;</span><br><span class="line">    return ifNull(toInteger(obj), defaultValue);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static Long toLong(Object obj) &#123;</span><br><span class="line">    if (isEmpty(obj)) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    if (obj instanceof Long) &#123;</span><br><span class="line">        return (Long) obj;</span><br><span class="line">    &#125;</span><br><span class="line">    if (obj instanceof Number) &#123;</span><br><span class="line">        return ((Number) obj).longValue();</span><br><span class="line">    &#125;</span><br><span class="line">    // 处理字符串值</span><br><span class="line">    String strValue = obj.toString().trim();</span><br><span class="line">    // 处理千分位</span><br><span class="line">    if (strValue.contains(COMMA)) &#123;</span><br><span class="line">        strValue = strValue.replaceAll(COMMA, EMPTY_VALUE);</span><br><span class="line">    &#125;</span><br><span class="line">    try &#123;</span><br><span class="line">        return new BigDecimal(strValue).longValue();</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static Long toLong(Object obj, Long defaultValue) &#123;</span><br><span class="line">    return ifNull(toLong(obj), defaultValue);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static BigDecimal toBigDecimal(Object obj) &#123;</span><br><span class="line">    if (isEmpty(obj)) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    if (obj instanceof BigDecimal) &#123;</span><br><span class="line">        return (BigDecimal) obj;</span><br><span class="line">    &#125;</span><br><span class="line">    // 处理字符串值</span><br><span class="line">    String strValue = obj.toString().trim();</span><br><span class="line">    // 处理千分位</span><br><span class="line">    if (strValue.contains(COMMA)) &#123;</span><br><span class="line">        strValue = strValue.replaceAll(COMMA, EMPTY_VALUE);</span><br><span class="line">    &#125;</span><br><span class="line">    try &#123;</span><br><span class="line">        return new BigDecimal(strValue);</span><br><span class="line">    &#125; catch (Exception e) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static BigDecimal toBigDecimal(Object obj, BigDecimal defaultValue) &#123;</span><br><span class="line">    return ifNull(toBigDecimal(obj), defaultValue);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static Boolean toBoolean(Object obj) &#123;</span><br><span class="line">    if (isEmpty(obj)) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    if (obj instanceof Boolean) &#123;</span><br><span class="line">        return (Boolean) obj;</span><br><span class="line">    &#125;</span><br><span class="line">    if (obj instanceof Number) &#123;</span><br><span class="line">        return Boolean.valueOf(((Number) obj).intValue() == 1);</span><br><span class="line">    &#125;</span><br><span class="line">    // 处理字符串值</span><br><span class="line">    String strValue = obj.toString().trim();</span><br><span class="line">    if (BOOLEAN_TRUE.equalsIgnoreCase(strValue)</span><br><span class="line">            || BOOLEAN_T.equalsIgnoreCase(strValue)</span><br><span class="line">            || BOOLEAN_Y.equalsIgnoreCase(strValue)</span><br><span class="line">            || BOOLEAN_1.equals(strValue)) &#123;</span><br><span class="line">        return Boolean.TRUE;</span><br><span class="line">    &#125;</span><br><span class="line">    if (BOOLEAN_FALSE.equalsIgnoreCase(strValue)</span><br><span class="line">            || BOOLEAN_F.equalsIgnoreCase(strValue)</span><br><span class="line">            || BOOLEAN_N.equalsIgnoreCase(strValue)</span><br><span class="line">            || BOOLEAN_0.equals(strValue)) &#123;</span><br><span class="line">        return Boolean.FALSE;</span><br><span class="line">    &#125;</span><br><span class="line">    return null;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static Boolean toBoolean(Object obj, Boolean defaultValue) &#123;</span><br><span class="line">    return ifNull(toBoolean(obj), defaultValue);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static boolean toboolean(Object obj) &#123;</span><br><span class="line">    return toBoolean(obj, false);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static Mapper getMapper() &#123;</span><br><span class="line">    if (mapper == null) &#123;</span><br><span class="line">        synchronized (ObjUtils.class) &#123;</span><br><span class="line">            if (mapper == null) &#123;</span><br><span class="line">                mapper = new DozerBeanMapper();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return mapper;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void map(Object source, Object destination) &#123;</span><br><span class="line">    getMapper().map(source, destination);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static &lt;T&gt; T map(Object source, Class&lt;T&gt; destinationClass) &#123;</span><br><span class="line">    return getMapper().map(source, destinationClass);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static String prop2String(Object obj) &#123;</span><br><span class="line">    if (obj == null) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    return ToStringBuilder.reflectionToString(obj);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static Integer[] string2IntAry(String str, String separatorChars, Integer defaultValue) &#123;</span><br><span class="line">    if (isBlank(str)) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    String[] strAry = StringUtils.split(str, separatorChars);</span><br><span class="line">    Integer[] intAry = new Integer[strAry.length];</span><br><span class="line">    for (int i = 0; i &lt; strAry.length; i++) &#123;</span><br><span class="line">        intAry[i] = toInteger(strAry[i], defaultValue);</span><br><span class="line">    &#125;</span><br><span class="line">    return intAry;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static List&lt;Integer&gt; string2IntList(String str, String separatorChars, Integer defaultValue) &#123;</span><br><span class="line">    if (isBlank(str)) &#123;</span><br><span class="line">        return new ArrayList&lt;Integer&gt;(1);</span><br><span class="line">    &#125;</span><br><span class="line">    String[] strAry = StringUtils.split(str, separatorChars);</span><br><span class="line">    List&lt;Integer&gt; intList = new ArrayList&lt;Integer&gt;(strAry.length);</span><br><span class="line">    for (int i = 0; i &lt; strAry.length; i++) &#123;</span><br><span class="line">        intList.add(toInteger(strAry[i], defaultValue));</span><br><span class="line">    &#125;</span><br><span class="line">    return intList;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static Long[] string2LongAry(String str, String separatorChars, Long defaultValue) &#123;</span><br><span class="line">    if (isBlank(str)) &#123;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">    String[] strAry = StringUtils.split(str, separatorChars);</span><br><span class="line">    Long[] longAry = new Long[strAry.length];</span><br><span class="line">    for (int i = 0; i &lt; strAry.length; i++) &#123;</span><br><span class="line">        longAry[i] = toLong(strAry[i], defaultValue);</span><br><span class="line">    &#125;</span><br><span class="line">    return longAry;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static List&lt;Long&gt; string2LongList(String str, String separatorChars, Long defaultValue) &#123;</span><br><span class="line">    if (isBlank(str)) &#123;</span><br><span class="line">        return new ArrayList&lt;Long&gt;(1);</span><br><span class="line">    &#125;</span><br><span class="line">    String[] strAry = StringUtils.split(str, separatorChars);</span><br><span class="line">    List&lt;Long&gt; longList = new ArrayList&lt;Long&gt;(strAry.length);</span><br><span class="line">    for (int i = 0; i &lt; strAry.length; i++) &#123;</span><br><span class="line">        longList.add(toLong(strAry[i], defaultValue));</span><br><span class="line">    &#125;</span><br><span class="line">    return longList;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    import java.math.BigDecimal;
-    import java.util.ArrayList;
-    import java.util.Collection;
-    import java.util.List;
-    import java.util.Map;
-
-    public class ObjUtils {
-
-    private static final String NULL_VALUE = &quot;NULL&quot;;
-    private static final String EMPTY_VALUE = &quot;&quot;;
-    private static final String COMMA = &quot;,&quot;;
-    private static final String BOOLEAN_TRUE = &quot;TRUE&quot;;
-    private static final String BOOLEAN_FALSE = &quot;FALSE&quot;;
-    private static final String BOOLEAN_T = &quot;T&quot;;
-    private static final String BOOLEAN_F = &quot;F&quot;;
-    private static final String BOOLEAN_Y = &quot;Y&quot;;
-    private static final String BOOLEAN_N = &quot;N&quot;;
-    private static final String BOOLEAN_1 = &quot;1&quot;;
-    private static final String BOOLEAN_0 = &quot;0&quot;;
-
-    private static Mapper mapper;
-
-    public static &lt;T&gt; T ifNull(T object, T defaultValue) {
-        return object == null ? defaultValue : object;
-    }
-
-    public static boolean isNull(Object value) {
-        if (value == null) {
-            return true;
-        } else if (value instanceof String &amp;&amp; NULL_VALUE.equalsIgnoreCase((String) value)) {
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean isEmpty(Object value) {
-        if (value == null) {
-            return true;
-        } else if (value instanceof String) {
-            if (StringUtils.isEmpty((String) value) || NULL_VALUE.equalsIgnoreCase((String) value)) {
-                return true;
-            }
-        } else if (value instanceof Collection &amp;&amp; CollectionUtils.isEmpty((Collection) value)) {
-            return true;
-        } else if (value instanceof Map &amp;&amp; MapUtils.isEmpty((Map) value)) {
-            return true;
-        }
-        return false;
-    }
-
-    public static boolean isNotEmpty(Object value) {
-        return !isEmpty(value);
-    }
-
-    public static &lt;T&gt; boolean isEmpty(final T[] array) {
-        return ArrayUtils.isEmpty(array);
-    }
-
-    public static &lt;T&gt; boolean isNotEmpty(final T[] array) {
-        return ArrayUtils.isNotEmpty(array);
-    }
-
-    public static boolean isBlank(Object value) {
-        if (value == null) {
-            return true;
-        } else if (value instanceof String) {
-            if (StringUtils.isBlank((String) value) || NULL_VALUE.equalsIgnoreCase((String) value)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean isNotBlank(Object value) {
-        return !isBlank(value);
-    }
-
-    public static String toString(Object obj) {
-        if (obj == null) {
-            return null;
-        }
-        if (obj instanceof String) {
-            return (String) obj;
-        }
-        return obj.toString();
-    }
-
-    public static String toString(Object obj, String defaultValue) {
-        return ifNull(toString(obj), defaultValue);
-    }
-
-    public static String toStringTrim(Object obj) {
-        String value = toString(obj);
-        if (value == null) {
-            return null;
-        }
-        return value.trim();
-    }
-
-    public static String toStringTrim(Object obj, String defaultValue) {
-        return ifNull(toStringTrim(obj), defaultValue);
-    }
-
-    public static Integer toInteger(Object obj) {
-        if (isEmpty(obj)) {
-            return null;
-        }
-        if (obj instanceof Integer) {
-            return (Integer) obj;
-        }
-        if (obj instanceof Number) {
-            return ((Number) obj).intValue();
-        }
-        // 处理字符串值
-        String strValue = obj.toString().trim();
-        // 处理千分位
-        if (strValue.contains(COMMA)) {
-            strValue = strValue.replaceAll(COMMA, EMPTY_VALUE);
-        }
-        try {
-            return new BigDecimal(strValue).intValue();
-        } catch (Exception e) {
-        }
-        return null;
-    }
-
-    public static Integer toInteger(Object obj, Integer defaultValue) {
-        return ifNull(toInteger(obj), defaultValue);
-    }
-
-    public static Long toLong(Object obj) {
-        if (isEmpty(obj)) {
-            return null;
-        }
-        if (obj instanceof Long) {
-            return (Long) obj;
-        }
-        if (obj instanceof Number) {
-            return ((Number) obj).longValue();
-        }
-        // 处理字符串值
-        String strValue = obj.toString().trim();
-        // 处理千分位
-        if (strValue.contains(COMMA)) {
-            strValue = strValue.replaceAll(COMMA, EMPTY_VALUE);
-        }
-        try {
-            return new BigDecimal(strValue).longValue();
-        } catch (Exception e) {
-        }
-        return null;
-    }
-
-    public static Long toLong(Object obj, Long defaultValue) {
-        return ifNull(toLong(obj), defaultValue);
-    }
-
-    public static BigDecimal toBigDecimal(Object obj) {
-        if (isEmpty(obj)) {
-            return null;
-        }
-        if (obj instanceof BigDecimal) {
-            return (BigDecimal) obj;
-        }
-        // 处理字符串值
-        String strValue = obj.toString().trim();
-        // 处理千分位
-        if (strValue.contains(COMMA)) {
-            strValue = strValue.replaceAll(COMMA, EMPTY_VALUE);
-        }
-        try {
-            return new BigDecimal(strValue);
-        } catch (Exception e) {
-        }
-        return null;
-    }
-
-    public static BigDecimal toBigDecimal(Object obj, BigDecimal defaultValue) {
-        return ifNull(toBigDecimal(obj), defaultValue);
-    }
-
-    public static Boolean toBoolean(Object obj) {
-        if (isEmpty(obj)) {
-            return null;
-        }
-        if (obj instanceof Boolean) {
-            return (Boolean) obj;
-        }
-        if (obj instanceof Number) {
-            return Boolean.valueOf(((Number) obj).intValue() == 1);
-        }
-        // 处理字符串值
-        String strValue = obj.toString().trim();
-        if (BOOLEAN_TRUE.equalsIgnoreCase(strValue)
-                || BOOLEAN_T.equalsIgnoreCase(strValue)
-                || BOOLEAN_Y.equalsIgnoreCase(strValue)
-                || BOOLEAN_1.equals(strValue)) {
-            return Boolean.TRUE;
-        }
-        if (BOOLEAN_FALSE.equalsIgnoreCase(strValue)
-                || BOOLEAN_F.equalsIgnoreCase(strValue)
-                || BOOLEAN_N.equalsIgnoreCase(strValue)
-                || BOOLEAN_0.equals(strValue)) {
-            return Boolean.FALSE;
-        }
-        return null;
-    }
-
-    public static Boolean toBoolean(Object obj, Boolean defaultValue) {
-        return ifNull(toBoolean(obj), defaultValue);
-    }
-
-    public static boolean toboolean(Object obj) {
-        return toBoolean(obj, false);
-    }
-
-    public static Mapper getMapper() {
-        if (mapper == null) {
-            synchronized (ObjUtils.class) {
-                if (mapper == null) {
-                    mapper = new DozerBeanMapper();
-                }
-            }
-        }
-        return mapper;
-    }
-
-    public static void map(Object source, Object destination) {
-        getMapper().map(source, destination);
-    }
-
-    public static &lt;T&gt; T map(Object source, Class&lt;T&gt; destinationClass) {
-        return getMapper().map(source, destinationClass);
-    }
-
-    public static String prop2String(Object obj) {
-        if (obj == null) {
-            return null;
-        }
-        return ToStringBuilder.reflectionToString(obj);
-    }
-
-    public static Integer[] string2IntAry(String str, String separatorChars, Integer defaultValue) {
-        if (isBlank(str)) {
-            return null;
-        }
-        String[] strAry = StringUtils.split(str, separatorChars);
-        Integer[] intAry = new Integer[strAry.length];
-        for (int i = 0; i &lt; strAry.length; i++) {
-            intAry[i] = toInteger(strAry[i], defaultValue);
-        }
-        return intAry;
-    }
-
-    public static List&lt;Integer&gt; string2IntList(String str, String separatorChars, Integer defaultValue) {
-        if (isBlank(str)) {
-            return new ArrayList&lt;Integer&gt;(1);
-        }
-        String[] strAry = StringUtils.split(str, separatorChars);
-        List&lt;Integer&gt; intList = new ArrayList&lt;Integer&gt;(strAry.length);
-        for (int i = 0; i &lt; strAry.length; i++) {
-            intList.add(toInteger(strAry[i], defaultValue));
-        }
-        return intList;
-    }
-
-    public static Long[] string2LongAry(String str, String separatorChars, Long defaultValue) {
-        if (isBlank(str)) {
-            return null;
-        }
-        String[] strAry = StringUtils.split(str, separatorChars);
-        Long[] longAry = new Long[strAry.length];
-        for (int i = 0; i &lt; strAry.length; i++) {
-            longAry[i] = toLong(strAry[i], defaultValue);
-        }
-        return longAry;
-    }
-
-    public static List&lt;Long&gt; string2LongList(String str, String separatorChars, Long defaultValue) {
-        if (isBlank(str)) {
-            return new ArrayList&lt;Long&gt;(1);
-        }
-        String[] strAry = StringUtils.split(str, separatorChars);
-        List&lt;Long&gt; longList = new ArrayList&lt;Long&gt;(strAry.length);
-        for (int i = 0; i &lt; strAry.length; i++) {
-            longList.add(toLong(strAry[i], defaultValue));
-        }
-        return longList;
-    }
-
-    }
-
-
-</code></pre>
                 
 
                 <hr>
@@ -629,7 +353,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/huweihuang">
+                        <a target="_blank"  href="https://github.com/xinzhileo">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -705,7 +429,7 @@
 <script>
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
-        async("http://www.huweihuang.com/js/jquery.tagcloud.js",function(){
+        async("http://www.xiaxue.online/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},
@@ -770,7 +494,7 @@
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
     <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
 <!-- Image to hack wechat -->
-<img src="http://www.huweihuang.com/img/icon_wechat.png" width="0" height="0" />
+<img src="http://www.xiaxue.online/img/icon_wechat.png" width="0" height="0" />
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

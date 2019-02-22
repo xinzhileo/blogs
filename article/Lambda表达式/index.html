@@ -18,7 +18,7 @@
         
     </title>
 
-    <link rel="canonical" href="http://www.huweihuang.com/article/Lambda表达式/">
+    <link rel="canonical" href="http://www.xiaxue.online/article/Lambda表达式/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -136,6 +136,30 @@
                     </li>
 
                     
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
                     
                 </ul>
             </div>
@@ -189,55 +213,22 @@
                 post-container">
 
                 <p>1.List 数组steam 处理：</p>
-<pre><code>List&lt;Integer&gt; nums = Lists.newArrayList(1,1,null,2,3,4,null,5,6,7,8,9,10);
-         System.out.println(“求和：”+nums
-                 .stream()//转成Stream
-                 .filter(team -&gt; team!=null)//过滤
-                 .distinct()//去重
-                 .mapToInt(num-&gt;num*2)//map操作
-                 .skip(2)//跳过前2个元素
-                 .limit(4)//限制取前4个元素
-                 .peek(System.out::println)//流式处理对象函数
-                 .sum());
-
-</code></pre><p>2.Lamda 求最小、求和等</p>
-<pre><code>// 求最小年龄
-Optional&lt;Student&gt; olderStudent3 = students.stream().collect(Collectors.minBy(Comparator.comparing(Student::getAge)));
-
-//求年龄总和
-int totalAge4 = students.stream().collect(Collectors.summingInt(Student::getAge));
-
-String names = students.stream().map(Student::getName).collect(Collectors.joining(“, “));
-// 输出：孔明, 伯约, 玄德, 云长, 翼德, 元直, 奉孝, 仲谋, 鲁肃, 丁奉
-
-java8还提供了parallelStream()来启动并行流式处理
-
-</code></pre><p>3.分页</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; nums = Lists.newArrayList(1,1,null,2,3,4,null,5,6,7,8,9,10);</span><br><span class="line">         System.out.println(“求和：”+nums</span><br><span class="line">                 .stream()//转成Stream</span><br><span class="line">                 .filter(team -&gt; team!=null)//过滤</span><br><span class="line">                 .distinct()//去重</span><br><span class="line">                 .mapToInt(num-&gt;num*2)//map操作</span><br><span class="line">                 .skip(2)//跳过前2个元素</span><br><span class="line">                 .limit(4)//限制取前4个元素</span><br><span class="line">                 .peek(System.out::println)//流式处理对象函数</span><br><span class="line">                 .sum());</span><br></pre></td></tr></table></figure>
+<p>2.Lamda 求最小、求和等</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 求最小年龄</span><br><span class="line">Optional&lt;Student&gt; olderStudent3 = students.stream().collect(Collectors.minBy(Comparator.comparing(Student::getAge)));</span><br><span class="line"></span><br><span class="line">//求年龄总和</span><br><span class="line">int totalAge4 = students.stream().collect(Collectors.summingInt(Student::getAge));</span><br><span class="line"></span><br><span class="line">String names = students.stream().map(Student::getName).collect(Collectors.joining(“, “));</span><br><span class="line">// 输出：孔明, 伯约, 玄德, 云长, 翼德, 元直, 奉孝, 仲谋, 鲁肃, 丁奉</span><br><span class="line"></span><br><span class="line">java8还提供了parallelStream()来启动并行流式处理</span><br></pre></td></tr></table></figure>
+<p>3.分页</p>
 <p><code>int totalPage = (int) (total % pageSize == 0 ? total / pageSize : (total / pageSize + 1));</code></p>
 <p>4.生成一个范围的随机数</p>
 <p><code>int randNumber = rand.nextInt(MAX - MIN + 1) + MIN</code></p>
-<p>5.</p>
-<pre><code>Area city = areaList.stream()
-                .filter(area -&gt; AreaTypeEnums.City.equals(area.getAreaType()))
-                .findFirst()
-                .orElse(null);
+<ol start="5">
+<li></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Area city = areaList.stream()</span><br><span class="line">                .filter(area -&gt; AreaTypeEnums.City.equals(area.getAreaType()))</span><br><span class="line">                .findFirst()</span><br><span class="line">                .orElse(null);</span><br><span class="line"></span><br><span class="line">个位   143%10=3</span><br><span class="line">十位    143/10%10=4</span><br><span class="line">百位    143/100 =1</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Lambda表达式</span><br><span class="line">public static Predicate&lt;String&gt; checkIfStartsWith(final String letter) &#123;   </span><br><span class="line">return name -&gt; name.startsWith(letter);  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">final long countFriendsStartN =  </span><br><span class="line">friends.stream() .filter(checkIfStartsWith(“N”)).count();  </span><br><span class="line">final long countFriendsStartB = friends.stream()  </span><br><span class="line">.filter(checkIfStartsWith(“B”)).count();</span><br></pre></td></tr></table></figure>
 
-个位   143%10=3
-十位    143/10%10=4
-百位    143/100 =1
-
-</code></pre><p>6.</p>
-<pre><code>Lambda表达式
-public static Predicate&lt;String&gt; checkIfStartsWith(final String letter) {   
-return name -&gt; name.startsWith(letter);  
-}  
-
-final long countFriendsStartN =  
-friends.stream() .filter(checkIfStartsWith(“N”)).count();  
-final long countFriendsStartB = friends.stream()  
-.filter(checkIfStartsWith(“B”)).count();
-
-</code></pre>
                 
 
                 <hr>
@@ -381,7 +372,7 @@ final long countFriendsStartB = friends.stream()
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/huweihuang">
+                        <a target="_blank"  href="https://github.com/xinzhileo">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -457,7 +448,7 @@ final long countFriendsStartB = friends.stream()
 <script>
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
-        async("http://www.huweihuang.com/js/jquery.tagcloud.js",function(){
+        async("http://www.xiaxue.online/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},
@@ -522,7 +513,7 @@ final long countFriendsStartB = friends.stream()
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
     <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
 <!-- Image to hack wechat -->
-<img src="http://www.huweihuang.com/img/icon_wechat.png" width="0" height="0" />
+<img src="http://www.xiaxue.online/img/icon_wechat.png" width="0" height="0" />
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>

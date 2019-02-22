@@ -18,7 +18,7 @@
         
     </title>
 
-    <link rel="canonical" href="http://www.huweihuang.com/article/JsonUtils工具/">
+    <link rel="canonical" href="http://www.xiaxue.online/article/JsonUtils工具/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -136,6 +136,30 @@
                     </li>
 
                     
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
                     
                 </ul>
             </div>
@@ -189,118 +213,8 @@
                 post-container">
 
                 <p>Json 转换为Model,采用ObjectMapper作为映射</p>
-<pre><code>import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Map;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br></pre></td><td class="code"><pre><span class="line">import com.fasterxml.jackson.annotation.JsonInclude.Include;</span><br><span class="line">import com.fasterxml.jackson.databind.DeserializationFeature;</span><br><span class="line">import com.fasterxml.jackson.databind.JavaType;</span><br><span class="line">import com.fasterxml.jackson.databind.ObjectMapper;</span><br><span class="line">import com.fasterxml.jackson.databind.PropertyNamingStrategy;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.text.SimpleDateFormat;</span><br><span class="line">import java.util.Collection;</span><br><span class="line">import java.util.Map;</span><br><span class="line">import org.apache.commons.lang3.StringUtils;</span><br><span class="line">import org.slf4j.Logger;</span><br><span class="line">import org.slf4j.LoggerFactory;</span><br><span class="line"></span><br><span class="line">public class JsonUtils &#123;</span><br><span class="line">    private static Logger logger = LoggerFactory.getLogger(JsonUtils.class);</span><br><span class="line">    private static ObjectMapper defaultMapper = new ObjectMapper();</span><br><span class="line">    private static ObjectMapper snakeMapper;</span><br><span class="line"></span><br><span class="line">    public JsonUtils() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static String toJson(Object obj) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return obj == null ? null : defaultMapper.writeValueAsString(obj);</span><br><span class="line">        &#125; catch (IOException var2) &#123;</span><br><span class="line">            logger.error(&quot;[writeValueAsString]：&quot; + var2.getMessage(), var2);</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static String toJsonSnake(Object obj) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return obj == null ? null : snakeMapper.writeValueAsString(obj);</span><br><span class="line">        &#125; catch (IOException var2) &#123;</span><br><span class="line">            logger.error(&quot;[writeValueAsString]：&quot; + var2.getMessage(), var2);</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; T toObj(String json, Class&lt;T&gt; clazz) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return StringUtils.isEmpty(json) ? null : defaultMapper.readValue(json, clazz);</span><br><span class="line">        &#125; catch (IOException var3) &#123;</span><br><span class="line">            logger.error(&quot;[readValue]：&quot; + var3.getMessage(), var3);</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; T toObjSnake(String json, Class&lt;T&gt; clazz) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            return StringUtils.isEmpty(json) ? null : snakeMapper.readValue(json, clazz);</span><br><span class="line">        &#125; catch (IOException var3) &#123;</span><br><span class="line">            logger.error(&quot;[readValue]：&quot; + var3.getMessage(), var3);</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; T toObj(String json, Class&lt;? extends Collection&gt; collectionClass, Class&lt;?&gt; elementClass) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            if (StringUtils.isEmpty(json)) &#123;</span><br><span class="line">                return null;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                JavaType javaType = defaultMapper.getTypeFactory().constructCollectionType(collectionClass, elementClass);</span><br><span class="line">                return defaultMapper.readValue(json, javaType);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException var4) &#123;</span><br><span class="line">            logger.error(&quot;[toObj]&quot; + var4.getMessage(), var4);</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; T toObj(String json, Class&lt;? extends Map&gt; mapClass, Class&lt;?&gt; keyClass, Class&lt;?&gt; valueClass) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            if (StringUtils.isEmpty(json)) &#123;</span><br><span class="line">                return null;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                JavaType javaType = defaultMapper.getTypeFactory().constructMapType(mapClass, keyClass, valueClass);</span><br><span class="line">                return defaultMapper.readValue(json, javaType);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException var5) &#123;</span><br><span class="line">            logger.error(&quot;[toObj]&quot; + var5.getMessage(), var5);</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static String formatJson(String json) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            if (json == null) &#123;</span><br><span class="line">                return null;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                Object obj = defaultMapper.readValue(json, Object.class);</span><br><span class="line">                return defaultMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception var2) &#123;</span><br><span class="line">            logger.error(&quot;[formatJson]：&quot; + var2.getMessage(), var2);</span><br><span class="line">            return json;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    static &#123;</span><br><span class="line">        defaultMapper.setSerializationInclusion(Include.NON_NULL);</span><br><span class="line">        defaultMapper.setDateFormat(new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;));</span><br><span class="line">        defaultMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);</span><br><span class="line">        snakeMapper = new ObjectMapper();</span><br><span class="line">        snakeMapper.setSerializationInclusion(Include.NON_NULL);</span><br><span class="line">        snakeMapper.setDateFormat(new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;));</span><br><span class="line">        snakeMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);</span><br><span class="line">        snakeMapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public class JsonUtils {
-    private static Logger logger = LoggerFactory.getLogger(JsonUtils.class);
-    private static ObjectMapper defaultMapper = new ObjectMapper();
-    private static ObjectMapper snakeMapper;
-
-    public JsonUtils() {
-    }
-
-    public static String toJson(Object obj) {
-        try {
-            return obj == null ? null : defaultMapper.writeValueAsString(obj);
-        } catch (IOException var2) {
-            logger.error(&quot;[writeValueAsString]：&quot; + var2.getMessage(), var2);
-            return null;
-        }
-    }
-
-    public static String toJsonSnake(Object obj) {
-        try {
-            return obj == null ? null : snakeMapper.writeValueAsString(obj);
-        } catch (IOException var2) {
-            logger.error(&quot;[writeValueAsString]：&quot; + var2.getMessage(), var2);
-            return null;
-        }
-    }
-
-    public static &lt;T&gt; T toObj(String json, Class&lt;T&gt; clazz) {
-        try {
-            return StringUtils.isEmpty(json) ? null : defaultMapper.readValue(json, clazz);
-        } catch (IOException var3) {
-            logger.error(&quot;[readValue]：&quot; + var3.getMessage(), var3);
-            return null;
-        }
-    }
-
-    public static &lt;T&gt; T toObjSnake(String json, Class&lt;T&gt; clazz) {
-        try {
-            return StringUtils.isEmpty(json) ? null : snakeMapper.readValue(json, clazz);
-        } catch (IOException var3) {
-            logger.error(&quot;[readValue]：&quot; + var3.getMessage(), var3);
-            return null;
-        }
-    }
-
-    public static &lt;T&gt; T toObj(String json, Class&lt;? extends Collection&gt; collectionClass, Class&lt;?&gt; elementClass) {
-        try {
-            if (StringUtils.isEmpty(json)) {
-                return null;
-            } else {
-                JavaType javaType = defaultMapper.getTypeFactory().constructCollectionType(collectionClass, elementClass);
-                return defaultMapper.readValue(json, javaType);
-            }
-        } catch (IOException var4) {
-            logger.error(&quot;[toObj]&quot; + var4.getMessage(), var4);
-            return null;
-        }
-    }
-
-    public static &lt;T&gt; T toObj(String json, Class&lt;? extends Map&gt; mapClass, Class&lt;?&gt; keyClass, Class&lt;?&gt; valueClass) {
-        try {
-            if (StringUtils.isEmpty(json)) {
-                return null;
-            } else {
-                JavaType javaType = defaultMapper.getTypeFactory().constructMapType(mapClass, keyClass, valueClass);
-                return defaultMapper.readValue(json, javaType);
-            }
-        } catch (IOException var5) {
-            logger.error(&quot;[toObj]&quot; + var5.getMessage(), var5);
-            return null;
-        }
-    }
-
-    public static String formatJson(String json) {
-        try {
-            if (json == null) {
-                return null;
-            } else {
-                Object obj = defaultMapper.readValue(json, Object.class);
-                return defaultMapper.writerWithDefaultPrettyPrinter().writeValueAsString(obj);
-            }
-        } catch (Exception var2) {
-            logger.error(&quot;[formatJson]：&quot; + var2.getMessage(), var2);
-            return json;
-        }
-    }
-
-    static {
-        defaultMapper.setSerializationInclusion(Include.NON_NULL);
-        defaultMapper.setDateFormat(new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;));
-        defaultMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        snakeMapper = new ObjectMapper();
-        snakeMapper.setSerializationInclusion(Include.NON_NULL);
-        snakeMapper.setDateFormat(new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;));
-        snakeMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        snakeMapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
-    }
-}
-
-</code></pre>
                 
 
                 <hr>
@@ -444,7 +358,7 @@ public class JsonUtils {
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/huweihuang">
+                        <a target="_blank"  href="https://github.com/xinzhileo">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -520,7 +434,7 @@ public class JsonUtils {
 <script>
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
-        async("http://www.huweihuang.com/js/jquery.tagcloud.js",function(){
+        async("http://www.xiaxue.online/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},
@@ -585,7 +499,7 @@ public class JsonUtils {
 	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
     <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
 <!-- Image to hack wechat -->
-<img src="http://www.huweihuang.com/img/icon_wechat.png" width="0" height="0" />
+<img src="http://www.xiaxue.online/img/icon_wechat.png" width="0" height="0" />
 <!-- Migrate from head to bottom, no longer block render and still work -->
 
 </body>
